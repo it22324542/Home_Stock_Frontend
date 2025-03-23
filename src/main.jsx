@@ -8,7 +8,7 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+//import Footer from "./components/Footer";
 import "./styles/global.css";
 
 
@@ -20,7 +20,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Pricing from "./pages/Pricing";
 import "./styles/Pricing.css";
-import Navbar from "./components/Navbar";
+
 
 
 
