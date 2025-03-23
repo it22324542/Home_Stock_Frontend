@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getEssentials, updateEssential } from "../services/essentialService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Sidebar from "../components/Sidebar";
 
 export default function EditEssential() {
   const { id } = useParams();
@@ -37,7 +38,7 @@ export default function EditEssential() {
     try {
       await updateEssential(id, formData);
       toast.success("Essential updated successfully!");
-      navigate("/");
+      navigate("/list-essential");
     } catch (error) {
       console.error("Failed to update essential:", error);
       toast.error("Failed to update essential.");
@@ -45,6 +46,10 @@ export default function EditEssential() {
   };
 
   return (
+    <div className="app-container">
+          {/* Sidebar */}
+          <Sidebar />
+
     <div className="container mt-4">
       <h2>Edit Essential</h2>
       <form onSubmit={handleSubmit}>
@@ -67,6 +72,7 @@ export default function EditEssential() {
         <button type="submit" className="btn btn-success">Update</button>
       </form>
       <ToastContainer />
+    </div>
     </div>
   );
 }

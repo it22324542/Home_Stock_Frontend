@@ -4,6 +4,7 @@ import { addEssential } from "../services/essentialService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/AddEssential.css';
+import Sidebar from "../components/Sidebar";
 
 const items = [
   { id: 1, name: "Toothpaste", image: "/images/toothpaste.jpg", category: "Personal Care" },
@@ -59,6 +60,10 @@ export default function AddEssential() {
   );
 
   return (
+
+    <div className="app-container">
+      {/* Sidebar */}
+      <Sidebar />
     <div className="container mt-4">
       <h2>Add Essential</h2>
 
@@ -125,6 +130,7 @@ export default function AddEssential() {
       )}
 
       <ToastContainer />
+    </div>
     </div>
   );
 }
