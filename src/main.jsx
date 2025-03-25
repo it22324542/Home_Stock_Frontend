@@ -19,6 +19,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Pricing from "./pages/Pricing";
+import Profile from "./pages/Profile";
 import "./styles/Pricing.css";
 
 
@@ -40,6 +41,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/Navbar" element={<Navbar />} />
+        <Route path="/profile" element={<Profile />}/>
       </Routes>
     </BrowserRouter>
   </StrictMode>

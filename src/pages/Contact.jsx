@@ -1,59 +1,83 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import "../styles/global.css";
+//import "../styles/global.css";
+import Navbar from "../components/Navbar"; 
+import Footer from "../components/Footer"; 
+import "../styles/Contact.css";
+
+
 
 const Contact = () => {
   return (
-    <>
-
-
+    
+       
+    <div className="contact-container">
       <Navbar />
-      {/* Hero Section */}
       
-      <div className="contact-hero">
-        <h1>Contact Us</h1>
-        <p>We'd love to hear from you! Reach out for any inquiries or support.</p>
-      </div>
-
-      {/* Contact Info Section */}
-      <div className="contact-info">
-        <div className="contact-card">
-          <i className="fas fa-map-marker-alt"></i>
-          <h3>Our Office</h3>
-          <p>500 Terry Francine Street, San Francisco, CA 94158</p>
-        </div>
-        <div className="contact-card">
-          <i className="fas fa-envelope"></i>
-          <h3>Email Us</h3>
-          <p>support@homestock.com</p>
-        </div>
-        <div className="contact-card">
-          <i className="fas fa-phone"></i>
-          <h3>Call Us</h3>
-          <p>123-456-7890</p>
-        </div>
-      </div>
-
-      {/* Contact Form Section */}
-      <div className="contact-form">
-        <h2>Send Us a Message</h2>
-        <form>
-          <div className="form-group">
-            <input type="text" placeholder="First Name" required />
-            <input type="text" placeholder="Last Name" required />
+      <div className="contact-card">
+        
+        {/* Left Side - Contact Info */}
+        <div className="contact-info">
+          <h2>Contact Business Solutions Sales</h2>
+          <p>Already a customer or need help with a billing issue? <a href="#">Contact Support</a></p>
+          <p className="phone">📞 +1800 708 8749</p>
+          <div className="contact-icons">
+            <a href="#"><i className="fab fa-facebook"></i></a>
+            <a href="#"><i className="fab fa-instagram"></i></a>
           </div>
+        </div>
+
+        {/* Right Side - Contact Form */}
+        <div className="contact-form">
+          <h2>Contact Us</h2>
+          <p>Fill out the form and we will get back to you within 24 hours.</p>
+          
           <div className="form-group">
-            <input type="email" placeholder="Email" required />
+            <input type="text" placeholder="First Name" />
+            <input type="text" placeholder="Last Name" />
+          </div>
+
+          <div className="form-group">
+            <input type="email" placeholder="Email" />
             <input type="text" placeholder="Phone" />
           </div>
-          <textarea placeholder="Your Message" rows="5"></textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
 
+          <div className="form-group">
+            <input type="text" placeholder="Company Name" />
+            <select>
+              <option>Select an Industry</option>
+              <option>Construction</option>
+              <option>Real Estate</option>
+              <option>Manufacturing</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <select>
+              <option>Select Revenue</option>
+              <option>Less than $100K</option>
+              <option>$100K - $1M</option>
+              <option>More than $1M</option>
+            </select>
+            <select>
+              <option>Select a Country</option>
+              <option>Sri Lanka</option>
+              <option>USA</option>
+              <option>UK</option>
+            </select>
+          </div>
+
+          <div className="checkbox-group">
+            <label><input type="checkbox" /> Yes, I would like to receive news and offers</label>
+            <label><input type="checkbox" /> Yes, I agree to receive phone calls</label>
+          </div>
+
+          <button className="submit-btn">Submit</button>
+        </div>
+
+      </div>
       <Footer />
-    </>
+    </div>
+    
   );
 };
 

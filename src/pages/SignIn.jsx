@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios for making API requests
 import "./../styles/SignIn.css"; // Import the CSS file
 
 const SignIn = () => {
@@ -29,7 +30,7 @@ const SignIn = () => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccessMessage("");
@@ -39,16 +40,22 @@ const SignIn = () => {
       return;
     }
 
-    // Simulating sign-in success
-    if (formData.email === "test@example.com" && formData.password === "password123") {
-      setSuccessMessage("Login successful!");
-      setShowPopup(true);
-      setTimeout(() => {
-        setShowPopup(false);
-        navigate("/dashboard"); // Redirect to dashboard
-      }, 2000);
-    } else {
-      setError("Invalid email or password.");
+    try {
+      // Make the POST request to your backend to sign in the user
+      const response = await axios.post("http://localhost:5000/api/users/signin", formData);
+
+      if (response.data) {
+        setSuccessMessage("Login successful!");
+        setShowPopup(true);
+        localStorage.setItem("userToken", response.data.token); // Store the token in localStorage
+
+        setTimeout(() => {
+          setShowPopup(false);
+          navigate("/dashboard"); // Redirect to the dashboard
+        }, 2000);
+      }
+    } catch (error) {
+      setError(error.response?.data?.message || "Invalid email or password.");
       setShowPopup(true);
     }
   };
@@ -64,8 +71,22 @@ const SignIn = () => {
       <div className="signin-card">
         <h2 className="signin-title">Sign In</h2>
         <form className="signin-form" onSubmit={handleSubmit}>
-          <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
-          <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
           <button type="submit" className="signin-btn">Sign In</button>
         </form>
         <a href="/signup" className="signin-link">Don't have an account? Sign up</a>

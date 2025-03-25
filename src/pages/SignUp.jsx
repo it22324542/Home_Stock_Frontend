@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios for making API requests
 import "../styles/SignUp.css"; // Import the CSS file
 
 const SignUp = () => {
@@ -34,7 +35,7 @@ const SignUp = () => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccessMessage("");
@@ -44,13 +45,22 @@ const SignUp = () => {
       return;
     }
 
-    // Simulating signup success
-    setSuccessMessage("Account created successfully!");
-    setShowPopup(true);
-    setTimeout(() => {
-      setShowPopup(false);
-      navigate("/signin"); // Redirect to Sign In page
-    }, 2000);
+    try {
+      // Make the POST request to your backend to register the user
+      const response = await axios.post("http://localhost:5000/api/users/signup", formData);
+
+      if (response.data) {
+        setSuccessMessage("Account created successfully!");
+        setShowPopup(true);
+        setTimeout(() => {
+          setShowPopup(false);
+          navigate("/signin"); // Redirect to Sign In page after 2 seconds
+        }, 2000);
+      }
+    } catch (error) {
+      setError(error.response?.data?.message || "Server error");
+      setShowPopup(true);
+    }
   };
 
   return (
@@ -64,9 +74,30 @@ const SignUp = () => {
       <div className="signup-card">
         <h2 className="signup-title">Sign Up</h2>
         <form className="signup-form" onSubmit={handleSubmit}>
-          <input type="text" name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} required />
-          <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
-          <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
           <button type="submit" className="signup-btn">Sign Up</button>
         </form>
         <a href="/signin" className="signup-link">Already have an account? Sign in</a>
