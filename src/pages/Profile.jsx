@@ -1,100 +1,117 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "../styles/Profile.css";
+import { FaUserCircle, FaBell } from "react-icons/fa";
+import { MdDashboard, MdLogout } from "react-icons/md";
+import { IoSettingsSharp } from "react-icons/io5";
 
 const Profile = () => {
+  const navigate = useNavigate(); // Initialize navigation
   const [user, setUser] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    profilePic: "",
+    firstName: "John",
+    lastName: "Doe",
+    email: "johndoe@example.com",
+    phone: "+1 234 567 890",
+    city: "New York",
+    state: "NY",
+    country: "USA",
+    postcode: "10001",
+    profilePic: "https://via.placeholder.com/150",
   });
-  
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/users/profile", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-      .then((res) => setUser(res.data))
-      .catch((err) => console.error(err));
-  }, []);
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0]);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append("name", user.name);
-      formData.append("phone", user.phone);
-      formData.append("address", user.address);
-      if (selectedFile) {
-        formData.append("profilePic", selectedFile);
-      }
-
-      const response = await axios.put("http://localhost:5000/api/users/profile", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-
-      setUser(response.data.user);
-      setMessage("Profile updated successfully!");
-    } catch (error) {
-      setMessage("Error updating profile.");
-    }
+  const handleLogout = () => {
+    // Add your logout logic here
+    console.log("User logged out");
+    navigate("/login"); // Redirect to login page after logout
   };
 
   return (
     <div className="profile-container">
-      <div className="profile-content">
-        <h2>Public Profile</h2>
-        {message && <p className="message">{message}</p>}
+      {/* Sidebar */}
+      <div className="sidebar">
+        <h2 className="logo">HomeStock</h2>
+        <ul>
+          <li onClick={() => navigate("/dashboard")}>
+            <MdDashboard className="icon" />
+            Dashboard
+          </li>
+          <li className="active" onClick={() => navigate("/profile")}>
+            <FaUserCircle className="icon" />
+            Profile
+          </li>
+          <li onClick={() => navigate("/settings")}>
+            <IoSettingsSharp className="icon" />
+            Settings
+          </li>
+          <li onClick={handleLogout}>
+            <MdLogout className="icon" />
+            Logout
+          </li>
+        </ul>
+      </div>
 
-        <div className="profile-card">
-          <div className="profile-image">
-            <img
-              src={user.profilePic ? `http://localhost:5000${user.profilePic}` : "/default-profile.png"}
-              alt="Profile"
-              className="profile-img"
-            />
-            <input type="file" id="profilePic" onChange={handleFileChange} />
+      {/* Profile Content */}
+      <div className="profile-content">
+        {/* Profile Header */}
+        <div className="profile-header">
+          <h2>Profile</h2>
+          <div className="user-info">
+            <FaBell className="notification-icon" />
+            <img src={user.profilePic} alt="Profile" className="profile-pic" />
+            <span>{user.firstName} {user.lastName}</span>
+          </div>
+        </div>
+
+        {/* Profile Details Section */}
+        <div className="profile-section">
+          <div className="profile-card">
+            <img src={user.profilePic} alt="User" className="profile-img" />
+            <h3>{user.firstName} {user.lastName}</h3>
+            <p>{user.email}</p>
+            <button className="view-profile-btn">View Public Profile</button>
           </div>
 
-          <form onSubmit={handleSubmit}>
+          {/* Account Settings Form */}
+          <div className="account-settings">
+            <h3>Account Settings</h3>
             <div className="form-group">
-              <label>Name</label>
-              <input type="text" name="name" value={user.name} onChange={handleChange} />
+              <label>First Name</label>
+              <input type="text" name="firstName" value={user.firstName} onChange={handleChange} />
             </div>
-            
             <div className="form-group">
-              <label>Email</label>
-              <input type="email" name="email" value={user.email} disabled />
+              <label>Last Name</label>
+              <input type="text" name="lastName" value={user.lastName} onChange={handleChange} />
             </div>
-            
             <div className="form-group">
-              <label>Phone</label>
+              <label>Email Address</label>
+              <input type="email" name="email" value={user.email} onChange={handleChange} />
+            </div>
+            <div className="form-group">
+              <label>Phone Number</label>
               <input type="text" name="phone" value={user.phone} onChange={handleChange} />
             </div>
-            
             <div className="form-group">
-              <label>Address</label>
-              <input type="text" name="address" value={user.address} onChange={handleChange} />
+              <label>City</label>
+              <input type="text" name="city" value={user.city} onChange={handleChange} />
             </div>
-
-            <button type="submit" className="update-btn">Update Profile</button>
-          </form>
+            <div className="form-group">
+              <label>State/County</label>
+              <input type="text" name="state" value={user.state} onChange={handleChange} />
+            </div>
+            <div className="form-group">
+              <label>Country</label>
+              <input type="text" name="country" value={user.country} onChange={handleChange} />
+            </div>
+            <div className="form-group">
+              <label>Postcode</label>
+              <input type="text" name="postcode" value={user.postcode} onChange={handleChange} />
+            </div>
+            <button className="update-btn">Update</button>
+          </div>
         </div>
       </div>
     </div>

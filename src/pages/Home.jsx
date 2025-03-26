@@ -1,10 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Navbar from "../components/Navbar"; 
 import Footer from "../components/Footer"; 
 import "../styles/global.css";
-import "../styles/Home.css"; // Create this file for styling
+import "../styles/Home.css"; // Ensure this file exists for styling
 
 const Home = () => {
+  const navigate = useNavigate(); // Initialize navigation function
+
   return (
     <>
       <Navbar />
@@ -19,7 +22,10 @@ const Home = () => {
         <div className="hero-content">
           <h1>Welcome to My Website</h1>
           <p>Your journey to something amazing starts here.</p>
-          <button className="hero-btn">Get Started</button>
+          {/* Add onClick to navigate to "/signup" */}
+          <button className="hero-btn" onClick={() => navigate("/signup")}>
+            Get Started
+          </button>
         </div>
       </div>
       <Footer />

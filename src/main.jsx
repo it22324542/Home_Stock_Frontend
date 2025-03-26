@@ -10,7 +10,7 @@ import Contact from "./pages/Contact";
 import Navbar from "./components/Navbar";
 //import Footer from "./components/Footer";
 import "./styles/global.css";
-
+import Dashboard from "./components/Dashboard";
 
 
 
@@ -21,7 +21,7 @@ import SignUp from "./pages/SignUp";
 import Pricing from "./pages/Pricing";
 import Profile from "./pages/Profile";
 import "./styles/Pricing.css";
-
+import Sidebar from "./components/Sidebar";
 
 
 
@@ -36,12 +36,14 @@ createRoot(document.getElementById("root")).render(
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/pricing" element={<Pricing />} />
-        <Route path="/" element={<Home />} />
+        <Route path="" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/Navbar" element={<Navbar />} />
+        <Route path="/Dashboard" element={<Dashboard />}/>
         <Route path="/profile" element={<Profile />}/>
+        <Route path="/sidebar" element={<Sidebar />}/>
       </Routes>
     </BrowserRouter>
   </StrictMode>

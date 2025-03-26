@@ -7,6 +7,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url("/assets/price.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   
   /* Service Container */
@@ -26,7 +30,7 @@
   }
   
   .highlight {
-    color: #28a745; /* Green highlight */
+    color: #ff6600; /* Green highlight */
   }
   
   /* Description */
@@ -47,7 +51,7 @@
   
   /* Service Cards */
   .service-card {
-    background-color: white;
+    background: linear-gradient(135deg, #ebb04a, #85763f);
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -69,10 +73,11 @@
     font-size: 1.5rem;
     color: #222;
     margin-bottom: 10px;
+    font-weight: bold;
   }
   
   .service-card p {
     font-size: 1rem;
-    color: #666;
+    color: #0f0f0f;
     line-height: 1.4;
   } 
