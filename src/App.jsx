@@ -14,7 +14,7 @@ function App() {
 
   return (
     <>
-      <div>Yasas</div>
+      <div>qqqq</div>
       <button type="button" class="btn btn-primary">Primary</button>
       <h1>{message}</h1>;
 

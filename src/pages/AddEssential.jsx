@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { addEssential } from "../services/essentialService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '../styles/AddEssential.css';
 import Sidebar from "../components/Sidebar";
 
 const items = [
@@ -45,9 +44,7 @@ export default function AddEssential() {
 
     try {
       await addEssential(formData);
-
       toast.success("Essential added successfully!", { autoClose: 3000 });
-
       navigate("/");
     } catch (error) {
       console.error("Failed to add essential:", error);
@@ -60,77 +57,95 @@ export default function AddEssential() {
   );
 
   return (
-
-    <div className="app-container">
+    <div className="app-container d-flex">
       {/* Sidebar */}
       <Sidebar />
-    <div className="container mt-4">
-      <h2>Add Essential</h2>
+      
+      <div className="container-fluid py-4 px-4">
+        <div className="card shadow-sm">
+          <div className="card-body">
+            <h2 className="card-title mb-4">Add Essential</h2>
 
-      <input
-        type="text"
-        className="form-control mb-3"
-        placeholder="Search for an item..."
-        value={searchQuery}
-        onChange={handleSearchChange}
-      />
-
-      <div className="row mb-4">
-        {filteredItems.map((item) => (
-          <div className="col-12 col-md-3 mb-3" key={item.id}>
-            <div className="item-card" onClick={() => handleSelectItem(item)}>
-              <img src={item.image} alt={item.name} className="item-image" />
-              <h5 className="item-title">{item.name}</h5>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {selectedItem && (
-        <div>
-          <h3>Add {selectedItem.name}</h3>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Category</label>
+            <div className="mb-4">
               <input
                 type="text"
-                className="form-control"
-                name="category"
-                value={formData.category}
-                readOnly
+                className="form-control form-control-lg"
+                placeholder="Search for an item..."
+                value={searchQuery}
+                onChange={handleSearchChange}
               />
             </div>
-            <div className="mb-3">
-              <label className="form-label">Quantity</label>
-              <input
-                type="number"
-                className="form-control"
-                name="quantity"
-                onChange={handleChange}
-                value={formData.quantity}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Threshold</label>
-              <input
-                type="number"
-                className="form-control"
-                name="threshold"
-                onChange={handleChange}
-                value={formData.threshold}
-                required
-              />
-            </div>
-            <button type="submit" className="btn btn-success">
-              Add
-            </button>
-          </form>
-        </div>
-      )}
 
-      <ToastContainer />
-    </div>
+            <div className="row g-3 mb-4">
+              {filteredItems.map((item) => (
+                <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={item.id}>
+                  <div 
+                    className={`card h-100 cursor-pointer ${selectedItem?.id === item.id ? 'border-primary border-2' : ''}`}
+                    onClick={() => handleSelectItem(item)}
+                  >
+                    <div className="card-img-top p-3" style={{ height: '150px' }}>
+                      <img 
+                        src={item.image} 
+                        alt={item.name} 
+                        className="img-fluid h-100 object-fit-contain mx-auto d-block" 
+                      />
+                    </div>
+                    <div className="card-body text-center">
+                      <h5 className="card-title">{item.name}</h5>
+                      <span className="badge bg-info text-dark">{item.category}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {selectedItem && (
+              <div className="mt-4">
+                <h3 className="mb-4">Add {selectedItem.name}</h3>
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label className="form-label">Category</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="category"
+                      value={formData.category}
+                      readOnly
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Quantity</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      name="quantity"
+                      onChange={handleChange}
+                      value={formData.quantity}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Threshold</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      name="threshold"
+                      onChange={handleChange}
+                      value={formData.threshold}
+                      required
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary px-4 py-2">
+                    Add Item
+                  </button>
+                </form>
+              </div>
+            )}
+
+            <ToastContainer />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

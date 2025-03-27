@@ -5,6 +5,9 @@ import { createRoot } from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+
+
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import EssentialsList from "./pages/EssentialsList";
 import AddEssential from "./pages/AddEssential";
