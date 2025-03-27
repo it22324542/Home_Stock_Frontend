@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { FaFilePdf, FaFileCsv, FaFilter, FaCalendarAlt } from 'react-icons/fa';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const ReportGeneration = ({ activities }) => {
+const ReportGeneration = ({ activities = [] }) => {
   const [dateRange, setDateRange] = useState({
     start: '',
     end: ''
@@ -11,8 +11,12 @@ const ReportGeneration = ({ activities }) => {
   
   // Filter activities based on selections
   const filteredActivities = activities.filter(activity => {
-    const matchesDate = (!dateRange.start || activity.timestamp >= dateRange.start) && 
-                       (!dateRange.end || activity.timestamp <= dateRange.end);
+    const activityDate = new Date(activity.timestamp);
+    const startDate = dateRange.start ? new Date(dateRange.start) : null;
+    const endDate = dateRange.end ? new Date(dateRange.end) : null;
+    
+    const matchesDate = (!startDate || activityDate >= startDate) && 
+                       (!endDate || activityDate <= new Date(endDate.setHours(23, 59, 59)));
     const matchesType = activityType === 'all' || activity.type === activityType;
     return matchesDate && matchesType;
   });
@@ -23,25 +27,27 @@ const ReportGeneration = ({ activities }) => {
     
     filteredActivities.forEach(activity => {
       const date = activity.timestamp.split('T')[0];
-      if (!activityCounts[date]) {
-        activityCounts[date] = 0;
-      }
-      activityCounts[date]++;
+      activityCounts[date] = (activityCounts[date] || 0) + 1;
     });
     
     return Object.entries(activityCounts).map(([date, count]) => ({
       date,
       activities: count
-    }));
+    })).sort((a, b) => new Date(a.date) - new Date(b.date));
   };
 
   const handleExportPDF = () => {
     // Implement PDF export logic
     console.log('Exporting to PDF:', filteredActivities);
+    alert('PDF export functionality would be implemented here');
   };
 
   const handleExportCSV = () => {
-    // Implement CSV export logic
+    if (filteredActivities.length === 0) {
+      alert('No data to export');
+      return;
+    }
+    
     const csvContent = [
       ['Date', 'Activity Type', 'Details'],
       ...filteredActivities.map(activity => [
@@ -49,7 +55,7 @@ const ReportGeneration = ({ activities }) => {
         activity.type,
         activity.details
       ])
-    ].map(e => e.join(',')).join('\n');
+    ].map(e => e.map(item => `"${item}"`).join(',')).join('\n');
     
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
@@ -60,6 +66,8 @@ const ReportGeneration = ({ activities }) => {
     link.click();
     document.body.removeChild(link);
   };
+
+  const chartData = prepareChartData();
 
   return (
     <div className="card shadow-sm mt-4">
@@ -117,19 +125,20 @@ const ReportGeneration = ({ activities }) => {
         {/* Chart */}
         <div className="mb-4" style={{ height: '300px' }}>
           <h5>Activity Overview</h5>
-          <BarChart
-            width={800}
-            height={300}
-            data={prepareChartData()}
-            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="activities" fill="#8884d8" name="Activities" />
-          </BarChart>
+          {chartData.length > 0 ? (
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="activities" fill="#8884d8" name="Activities" />
+              </BarChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="text-center py-4">No data available for the selected filters</div>
+          )}
         </div>
 
         {/* Activity Table */}
@@ -143,21 +152,27 @@ const ReportGeneration = ({ activities }) => {
               </tr>
             </thead>
             <tbody>
-              {filteredActivities.map((activity) => (
-                <tr key={activity.id}>
-                  <td>{new Date(activity.timestamp).toLocaleString()}</td>
-                  <td>
-                    <span className={`badge ${
-                      activity.type === 'login' ? 'bg-success' :
-                      activity.type === 'profile_update' ? 'bg-primary' :
-                      'bg-info'
-                    }`}>
-                      {activity.type.replace('_', ' ')}
-                    </span>
-                  </td>
-                  <td>{activity.details}</td>
+              {filteredActivities.length > 0 ? (
+                filteredActivities.map((activity) => (
+                  <tr key={activity.id || activity.timestamp}>
+                    <td>{new Date(activity.timestamp).toLocaleString()}</td>
+                    <td>
+                      <span className={`badge ${
+                        activity.type === 'login' ? 'bg-success' :
+                        activity.type === 'profile_update' ? 'bg-primary' :
+                        'bg-info'
+                      }`}>
+                        {activity.type.replace('_', ' ')}
+                      </span>
+                    </td>
+                    <td>{activity.details}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3" className="text-center py-4">No activities found for the selected filters</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

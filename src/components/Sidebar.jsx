@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaHome, FaBox, FaShoppingCart, FaClipboardList, FaUser } from "react-icons/fa";
-import "../styles/Sidebar.css"; // Import the CSS file for styling
+
 
 export default function Sidebar() {
   const navigate = useNavigate();

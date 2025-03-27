@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Import axios for making API requests
-import "./../styles/SignIn.css"; // Import the CSS file
+import axios from "axios";
+import { Container, Card, Form, Button, Alert } from "react-bootstrap";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -36,22 +36,21 @@ const SignIn = () => {
     setSuccessMessage("");
 
     if (!validateForm()) {
-      setShowPopup(true); // Show error popup
+      setShowPopup(true);
       return;
     }
 
     try {
-      // Make the POST request to your backend to sign in the user
       const response = await axios.post("http://localhost:5000/api/users/signin", formData);
 
       if (response.data) {
         setSuccessMessage("Login successful!");
         setShowPopup(true);
-        localStorage.setItem("userToken", response.data.token); // Store the token in localStorage
+        localStorage.setItem("userToken", response.data.token);
 
         setTimeout(() => {
           setShowPopup(false);
-          navigate("/dashboard"); // Redirect to the dashboard
+          navigate("/dashboard");
         }, 2000);
       }
     } catch (error) {
@@ -61,37 +60,78 @@ const SignIn = () => {
   };
 
   return (
-    <div className="signin-container">
-      {showPopup && (
-        <div className={`popup-message ${error ? "error" : "success"}`}>
-          {error || successMessage}
-        </div>
-      )}
+    <Container 
+      fluid 
+      className="d-flex justify-content-center align-items-center vh-100"
+      style={{
+        backgroundImage: "url('/assets/signin-background6.jpeg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat"
+      }}
+    >
+      <Card className="p-4" style={{
+        width: "350px",
+        backgroundColor: "rgba(167, 91, 5, 0.1)",
+        backdropFilter: "blur(10px)",
+        boxShadow: "0 4px 10px rgba(255, 255, 255, 0.2)"
+      }}>
+        {showPopup && (
+          <Alert 
+            variant={error ? "danger" : "success"} 
+            onClose={() => setShowPopup(false)} 
+            dismissible
+            className="mt-3"
+          >
+            {error || successMessage}
+          </Alert>
+        )}
 
-      <div className="signin-card">
-        <h2 className="signin-title">Sign In</h2>
-        <form className="signin-form" onSubmit={handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-          <button type="submit" className="signin-btn">Sign In</button>
-        </form>
-        <a href="/signup" className="signin-link">Don't have an account? Sign up</a>
-      </div>
-    </div>
+        <Card.Body>
+          <Card.Title className="text-center mb-4 text-white">
+            <h2>Sign In</h2>
+          </Card.Title>
+          
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Control
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Control
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Button 
+              variant="danger" 
+              type="submit" 
+              className="w-100 mb-3"
+            >
+              Sign In
+            </Button>
+          </Form>
+
+          <Card.Text className="text-center">
+            <a href="/signup" className="text-white">
+              Don't have an account? Sign up
+            </a>
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    </Container>
   );
 };
 

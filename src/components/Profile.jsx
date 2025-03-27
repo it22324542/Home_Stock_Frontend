@@ -187,12 +187,7 @@ const Profile = () => {
                   3
                 </span>
               </div>
-              <img 
-                src={user.profilePic} 
-                alt="Profile" 
-                className="rounded-circle border border-dark me-2" 
-                style={{ width: "40px", height: "40px", objectFit: "cover" }}
-              />
+             
               <span>{user.firstName} {user.lastName}</span>
             </div>
           </div>
@@ -203,12 +198,7 @@ const Profile = () => {
             <div className="col-lg-4">
               <div className="card shadow-sm h-100">
                 <div className="card-body text-center p-4">
-                  <img 
-                    src={user.profilePic} 
-                    alt="User" 
-                    className="rounded-circle border border-3 border-primary mb-3" 
-                    style={{ width: "100px", height: "100px", objectFit: "cover" }}
-                  />
+                 
                   <h3 className="card-title">{user.firstName} {user.lastName}</h3>
                   <p className="card-text text-muted">
                     <MdOutlineVerifiedUser className="text-success me-2" />
@@ -225,9 +215,9 @@ const Profile = () => {
                       </button>
                       <button 
                         className="btn btn-outline-primary w-100 mb-2"
-                        onClick={handleViewPublicProfile}
+                        onClick={() => navigate("/ReportGeneration")}
                       >
-                         Profile
+                         Activity Report
                       </button>
                       <button 
                         className="btn btn-outline-danger w-100"
@@ -325,34 +315,8 @@ const Profile = () => {
                           disabled={!editMode}
                         />
                       </div>
-                      <div className="col-12">
-                        <label className="form-label d-flex align-items-center">
-                          <FaUserEdit className="me-2" />
-                          Bio
-                        </label>
-                        <textarea 
-                          className="form-control" 
-                          name="bio" 
-                          rows="3"
-                          value={editMode ? tempUser.bio : user.bio} 
-                          onChange={handleChange}
-                          disabled={!editMode}
-                        />
-                      </div>
-                      <div className="col-md-4">
-                        <label className="form-label d-flex align-items-center">
-                          <FaCity className="me-2" />
-                          City
-                        </label>
-                        <input 
-                          type="text" 
-                          className="form-control" 
-                          name="city" 
-                          value={editMode ? tempUser.city : user.city} 
-                          onChange={handleChange}
-                          disabled={!editMode}
-                        />
-                      </div>
+                     
+                    
                       <div className="col-md-4">
                         <label className="form-label d-flex align-items-center">
                           <FaGlobeAmericas className="me-2" />
