@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getEssentials, deleteEssential } from "../services/essentialService";
 import { Link, useNavigate } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sideba";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaSearch, FaPlus, FaEdit, FaTrash, FaBoxOpen, FaExclamationTriangle } from "react-icons/fa";

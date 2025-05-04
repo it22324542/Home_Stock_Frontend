@@ -33,7 +33,7 @@ const Home = () => {
           <p className="lead fs-3 mb-5">Your smart solution for household inventory management</p>
           
           <button 
-            className="btn btn-warning btn-lg px-5 py-3 fw-bold"
+            className="btn btn-warning btn-lg px-5 py-3 fw-bold blink-btn"
             onClick={() => navigate("/signup")}
           >
             Get Started
@@ -78,6 +78,16 @@ const Home = () => {
       </section>
 
       <Footer />
+
+      <style>{`
+        .blink-btn {
+          animation: blink 1s linear infinite;
+        }
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.4; }
+        }
+      `}</style>
     </div>
   );
 };

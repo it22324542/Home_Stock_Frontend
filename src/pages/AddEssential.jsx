@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { addEssential } from "../services/essentialService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sideba";
 import { FaSearch, FaPlus, FaShoppingBasket } from 'react-icons/fa';
 
 const items = [

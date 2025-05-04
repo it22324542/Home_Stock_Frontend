@@ -1,15 +1,33 @@
+/* Basic global styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-  }
-  .container {
-    max-width: 800px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  
+  background: #e3f1f7;
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Navbar styles */
+.navbar {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+
+.navbar-brand {
+  letter-spacing: 1px;
+}
+
+.nav-link {
+  transition: color 0.2s;
+}
+
+.nav-link.active {
+  text-decoration: underline;
+}
+
+.btn-primary {
+  background: #0099c8;
+  border: none;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background: #007ea7;
+} 

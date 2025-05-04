@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getEssentials, updateEssential } from "../services/essentialService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sideba";
 import { FaEdit, FaArrowLeft, FaSave, FaBox, FaExclamationTriangle } from "react-icons/fa";
 
 export default function EditEssential() {
