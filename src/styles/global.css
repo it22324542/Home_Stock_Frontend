@@ -1,0 +1,343 @@
+/* Reset & Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #131212;
+    background-image: url("/assets/home7.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #333;
+}*/
+
+/* Main Layout for Sticky Footer */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #131212;
+    background-image: url("/assets/home7.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #333;
+    text-align: center;
+   
+}
+
+
+/* Navbar Styles 
+.navbar {
+    background: rgba(51, 51, 51, 0.8);
+    color: white;
+    padding: 15px 419px;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    
+    
+}
+
+.nav-links li {
+    margin: 10px 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ff6200;
+}*/
+
+/* Navbar Styles */
+.navbar {
+    background: rgba(51, 51, 51, 0.8);
+    color: white;
+    padding: 15px 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    box-sizing: border-box;
+}
+
+.nav-brand {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ff6200;
+}
+
+/* Add this to prevent content from being hidden behind navbar */
+body {
+    margin: 0;
+    padding-top: 0px; /* Adjust based on your navbar height */
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 120px 0;
+    background: url("/assets/hero-bg.jpg") no-repeat center center/cover;
+    color: white;
+}
+
+.hero-btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+    border: none;
+    background: #ff6200;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.hero-btn:hover {
+    background: #e55b00;
+}
+
+/* About Page Styling */
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 50px;
+    background-image: url("/assets/home4.jpeg"); 
+}
+
+.about-content {
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.about-content h1 {
+    font-size: 2.5rem;
+    color: #ff6200;
+    margin-bottom: 20px;
+}
+
+.about-content h2 {
+    font-size: 1.8rem;
+    color: #f9a825;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.about-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.about-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-content ul li {
+    font-size: 1.2rem;
+    text-align: left;
+    padding: 8px 0;
+    color: #ffcc80;
+    display: flex;
+    align-items: center;
+}
+
+.about-content ul li::before {
+    content: "✔";
+    color: #ff6200;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Contact Page */
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 50px auto;
+    max-width: 1000px;
+}
+
+.contact-info, .contact-form {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.contact-card {
+    background: linear-gradient(135deg, #573b06, #e2cb76);
+    color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+}
+
+.contact-card i {
+    font-size: 40px;
+    color: #ff6200;
+    margin-bottom: 15px;
+}
+
+/* Form Styling */
+.contact-form {
+    width: 50%;
+    max-width: 500px;
+}
+
+.contact-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    resize: vertical;
+    height: 150px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #004494;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    padding-left: 45%;
+    padding-right: 45%;
+    background: #333;
+    color: white;
+    margin-top: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-container, .contact-container {
+        padding: 20px;
+    }
+
+    .about-content {
+        padding: 20px;
+    }
+
+    .about-content h1 {
+        font-size: 2rem;
+    }
+
+    .about-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .about-content p,
+    .about-content ul li {
+        font-size: 1rem;
+    }
+
+    .contact-info,
+    .contact-form {
+        width: 100%;
+        max-width: 90%;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+}

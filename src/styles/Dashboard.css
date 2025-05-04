@@ -1,0 +1,128 @@
+/* Dashboard Container - Full Viewport */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+    background-image: url("/assets/dashboard-background.jpg"); /* Add your background */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  
+  /* Main Content Area */
+  .main-content {
+    flex: 1;
+    padding: 30px;
+    margin-left: 250px; /* Match sidebar width */
+    backdrop-filter: blur(5px);
+  }
+  
+  /* Dashboard Title */
+  .dashboard-title {
+    color: rgb(31, 8, 95);
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    font-size: 2rem;
+  }
+  
+  /* Tabs Navigation */
+  .tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .tab {
+    padding: 12px 25px;
+    background: rgba(221, 120, 6, 0.3);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: white;
+    font-weight: 500;
+    backdrop-filter: blur(5px);
+  }
+  
+  .tab.active {
+    background: rgba(221, 120, 6, 0.6);
+    box-shadow: 0 4px 15px rgba(69, 54, 4, 0.3);
+  }
+  
+  /* Category Containers */
+  .category-container {
+    background: rgba(30, 30, 45, 0.7); /* Dark semi-transparent background */
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+  }
+  
+  .category-container h2 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+  
+  /* Button Styles */
+  .button-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  
+  .add-btn, .list-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    backdrop-filter: blur(5px);
+  }
+  
+  .add-btn {
+    background: rgba(76, 175, 80, 0.7); /* Green with transparency */
+    color: white;
+  }
+  
+  .list-btn {
+    background: rgba(33, 150, 243, 0.7); /* Blue with transparency */
+    color: white;
+  }
+  
+  .add-btn:hover, .list-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Items List */
+  .items-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  
+  .item-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+  }
+  
+  .item-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+  }
