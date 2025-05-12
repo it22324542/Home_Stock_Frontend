@@ -30,6 +30,7 @@ import {
   MdSchool
 } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
+import LoginReport from './LoginReport';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -213,11 +214,31 @@ const Profile = () => {
               <h4 className="mb-0">{user.name}</h4>
               <p className="text-muted">{user.email}</p>
               <button
-                className="btn btn-primary"
+                className="btn btn-primary w-100"
                 onClick={() => setIsEditing(!isEditing)}
               >
                 {isEditing ? "Cancel Edit" : "Edit Profile"}
               </button>
+              <div className="d-flex flex-column gap-2 mt-3">
+                <button 
+                  className="btn btn-info text-white w-100"
+                  onClick={() => navigate('/profile/report')}
+                >
+                  <FaBell className="me-2" />
+                  Generate Report
+                </button>
+                <button 
+                  className="btn btn-danger w-100"
+                  onClick={() => {
+                    if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                      handleDeleteProfile();
+                    }
+                  }}
+                >
+                  <FaTrash className="me-2" />
+                  Delete Account
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -579,9 +600,9 @@ const ProfilePage = () => {
     <Routes>
       <Route path="/" element={<Profile />} />
       <Route path="/public" element={<PublicProfile />} />
+      <Route path="/report" element={<LoginReport />} />
     </Routes>
   );
-  
 };
 
 export default ProfilePage;

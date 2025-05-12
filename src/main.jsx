@@ -1,5 +1,7 @@
 //new update essentials navigations
 
+// new update login report
+
 
 import { StrictMode, useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -120,7 +122,7 @@ function App() {
           !isAuthenticated ? (
             <SignUp />
           ) : (
-            <Navigate to="/dashboard" replace />
+            <Navigate to="/" replace />
           )
         } />
 
@@ -137,7 +139,7 @@ function App() {
               </div>
             </div>
           ) : (
-            <Navigate to="/signin" replace />
+            <Navigate to="" replace />
           )
         } />
         <Route path="/profile/*" element={
@@ -152,7 +154,7 @@ function App() {
               </div>
             </div>
           ) : (
-            <Navigate to="/signin" replace />
+            <Navigate to="" replace />
           )
         } />
         <Route path="/essentials/list" element={
@@ -167,7 +169,7 @@ function App() {
               </div>
             </div>
           ) : (
-            <Navigate to="/signin" replace />
+            <Navigate to="" replace />
           )
         } />
         <Route path="/essentials/add" element={
@@ -197,7 +199,7 @@ function App() {
               </div>
             </div>
           ) : (
-            <Navigate to="/signin" replace />
+            <Navigate to="" replace />
           )
         } />
         <Route path="/report" element={
@@ -212,7 +214,7 @@ function App() {
               </div>
             </div>
           ) : (
-            <Navigate to="/signin" replace />
+            <Navigate to="" replace />
           )
         } />
       </Routes>

@@ -26,7 +26,7 @@ const SignIn = ({ setIsAuthenticated }) => {
       if (response.data && response.data.user && response.data.user.token) {
         localStorage.setItem("token", response.data.user.token);
         setIsAuthenticated(true);
-        navigate("/dashboard");
+          navigate("/dashboard");
       } else {
         setError("Invalid response from server");
       }
@@ -50,9 +50,9 @@ const SignIn = ({ setIsAuthenticated }) => {
           {error && (
             <Alert variant="danger" onClose={() => setError("")} dismissible>
               {error}
-            </Alert>
-          )}
-
+          </Alert>
+        )}
+          
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Email address</Form.Label>
@@ -76,9 +76,9 @@ const SignIn = ({ setIsAuthenticated }) => {
               />
             </Form.Group>
 
-            <Button
+            <Button 
               variant="primary"
-              type="submit"
+              type="submit" 
               className="w-100 mb-3"
               disabled={loading}
             >
