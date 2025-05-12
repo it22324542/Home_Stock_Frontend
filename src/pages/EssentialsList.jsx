@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getEssentials, deleteEssential } from "../services/essentialService";
 import { Link, useNavigate } from "react-router-dom";
-import Sidebar from "../components/Sideba";
+//import Sideba from "../components/Sideba";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaSearch, FaPlus, FaEdit, FaTrash, FaBoxOpen, FaExclamationTriangle } from "react-icons/fa";
@@ -50,7 +50,7 @@ export default function EssentialsList() {
 
   return (
     <div className="app-container d-flex">
-      <Sidebar />
+      
       
       <div className="container-fluid py-4 px-4">
         <div className="d-flex justify-content-between align-items-center mb-4">
@@ -58,7 +58,7 @@ export default function EssentialsList() {
             <FaBoxOpen className="text-primary me-2" size={28} />
             <h2 className="m-0 text-primary">Household Essentials</h2>
           </div>
-          <Link to="/add-essential" className="btn btn-primary rounded-pill px-4">
+          <Link to="/essentials/add" className="btn btn-primary rounded-pill px-4">
             <FaPlus className="me-2" />
             Add New Essential
           </Link>

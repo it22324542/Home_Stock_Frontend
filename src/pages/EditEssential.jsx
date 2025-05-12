@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getEssentials, updateEssential } from "../services/essentialService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Sidebar from "../components/Sideba";
+import Sideba from "../components/Sideba";
 import { FaEdit, FaArrowLeft, FaSave, FaBox, FaExclamationTriangle } from "react-icons/fa";
 
 export default function EditEssential() {
@@ -59,7 +59,7 @@ export default function EditEssential() {
 
   return (
     <div className="app-container d-flex">
-      <Sidebar />
+      <Sideba />
       
       <div className="container-fluid py-4 px-4">
         <div className="card shadow-lg border-0 rounded-4">

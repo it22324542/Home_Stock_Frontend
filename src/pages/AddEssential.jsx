@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { addEssential } from "../services/essentialService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Sidebar from "../components/Sideba";
+//import Sideba from "../components/Sideba";
 import { FaSearch, FaPlus, FaShoppingBasket } from 'react-icons/fa';
 
 const items = [
@@ -46,7 +46,7 @@ export default function AddEssential() {
     try {
       await addEssential(formData);
       toast.success("Essential added successfully!", { autoClose: 3000 });
-      navigate("/");
+      navigate("/essentials/list");
     } catch (error) {
       console.error("Failed to add essential:", error);
       toast.error("Failed to add essential. Please try again.", { autoClose: 3000 });
@@ -59,7 +59,7 @@ export default function AddEssential() {
 
   return (
     <div className="app-container d-flex">
-      <Sidebar />
+      
       
       <div className="container-fluid py-4 px-4">
         <div className="row g-4">

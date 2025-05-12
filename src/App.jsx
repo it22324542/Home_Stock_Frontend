@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./styles/index.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import './App.css'
 
 function App() {
   const [message, setMessage] = useState("");
@@ -15,7 +14,7 @@ function App() {
 
   return (
     <>
-      <div>Yasas</div>
+      <div>qqqq</div> 
       <button type="button" class="btn btn-primary">Primary</button>
       <h1>{message}</h1>;
 

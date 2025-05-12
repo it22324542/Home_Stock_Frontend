@@ -1,17 +1,22 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Container, Card, Form, Button, Alert } from "react-bootstrap";
 import { FaSignInAlt, FaUserPlus } from "react-icons/fa";
 
 const SignIn = ({ setIsAuthenticated }) => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -21,17 +26,13 @@ const SignIn = ({ setIsAuthenticated }) => {
 
     try {
       const response = await axios.post("http://localhost:5000/api/users/signin", formData);
-      console.log("SignIn response:", response.data); // Debug log
       
-      if (response.data && response.data.user && response.data.user.token) {
-        localStorage.setItem("token", response.data.user.token);
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
         setIsAuthenticated(true);
-        navigate("/dashboard");
-      } else {
-        setError("Invalid response from server");
+        navigate("/");
       }
     } catch (error) {
-      console.error("SignIn error:", error); // Debug log
       setError(error.response?.data?.message || "An error occurred during sign in");
     } finally {
       setLoading(false);
@@ -39,70 +40,77 @@ const SignIn = ({ setIsAuthenticated }) => {
   };
 
   return (
-    <Container className="min-vh-100 d-flex align-items-center justify-content-center">
-      <Card className="shadow-lg" style={{ width: "400px" }}>
-        <Card.Body className="p-5">
+    <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+      <div className="card shadow-lg" style={{ width: "400px" }}>
+        <div className="card-body p-5">
           <h2 className="text-center mb-4">
             <FaSignInAlt className="me-2" />
             Sign In
           </h2>
 
           {error && (
-            <Alert variant="danger" onClose={() => setError("")} dismissible>
+            <div className="alert alert-danger" role="alert">
               {error}
-            </Alert>
+            </div>
           )}
 
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email address
+              </label>
+              <input
                 type="email"
+                className="form-control"
+                id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
                 type="password"
+                className="form-control"
+                id="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Button
-              variant="primary"
+            <button
               type="submit"
-              className="w-100 mb-3"
+              className="btn btn-primary w-100 mb-3"
               disabled={loading}
             >
               {loading ? "Signing in..." : "Sign In"}
-            </Button>
+            </button>
 
             <div className="text-center">
               <p className="mb-0">
                 Don't have an account?{" "}
-                <Button
-                  variant="link"
-                  className="p-0"
+                <button
+                  type="button"
+                  className="btn btn-link p-0"
                   onClick={() => navigate("/signup")}
                 >
                   <FaUserPlus className="me-1" />
                   Sign Up
-                </Button>
+                </button>
               </p>
             </div>
-          </Form>
-        </Card.Body>
-      </Card>
-    </Container>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default SignIn;
+export default SignIn; 
