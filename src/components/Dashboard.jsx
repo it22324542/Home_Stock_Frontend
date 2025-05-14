@@ -51,7 +51,7 @@ const Sidebar = () => {
           id="inventory-dropdown"
           className="mb-2"
         >
-          <NavDropdown.Item onClick={() => navigate("/inventory/list")}>
+          <NavDropdown.Item onClick={() => navigate("/inventory")}>
             View Inventory
           </NavDropdown.Item>
           <NavDropdown.Item onClick={() => navigate("/inventory/add")}>
