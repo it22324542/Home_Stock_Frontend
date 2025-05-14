@@ -610,11 +610,16 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
+
+//import './App.css'
+
+
 
 function App() {
   // State management
