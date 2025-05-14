@@ -1,3 +1,4 @@
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 //import './index.css'
@@ -25,7 +26,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Pricing from "./pages/Pricing";
 import Profile from "./components/Profile";
-
+import App from "./App";
 import Sidebar from "./components/Sidebar";
 
 import ReportGeneration from "./pages/ReportGeneration";
@@ -50,7 +51,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/Dashboard" element={<Dashboard />}/>
         <Route path="/profile" element={<Profile />}/>
         <Route path="/sidebar" element={<Sidebar />}/>
-      
+      <Route path="/inventory" element={<App />}/>
         <Route path="/ReportGeneration" element={<ReportGeneration />} />
       </Routes>
     </BrowserRouter>
@@ -58,4 +59,5 @@ createRoot(document.getElementById("root")).render(
 );
 
 export default App;
+
 
